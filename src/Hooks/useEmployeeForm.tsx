@@ -16,16 +16,40 @@ interface InputEmployeeState {
 	CV: string;
 }
 
-export function useEmployeeForm() {
-	const [formData, setFormData] = useState<InputEmployeeState>(initialFormData);
+export function useEmployeeForm(initialCount: number) {
+	const [formEmployeeData, setFormData] = useState<InputEmployeeState[]>(
+		Array(initialCount).fill({ ...initialFormData })
+	);
 
-	const handleChangeForm = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleChangeEmployeeForm = (
+		index: number,
+		e: ChangeEvent<HTMLInputElement>
+	) => {
 		const { name, value } = e.target;
-		setFormData({ ...formData, [name]: value });
+		setFormData((prevFormData) => {
+			const updatedFormData = [...prevFormData];
+			updatedFormData[index] = { ...updatedFormData[index], [name]: value };
+			return updatedFormData;
+		});
+	};
+
+	const setFormCount = (count: number) => {
+		setFormData((prevFormData) => {
+			const newFormData = [...prevFormData];
+			if (count > newFormData.length) {
+				for (let i = newFormData.length; i < count; i++) {
+					newFormData.push({ ...initialFormData });
+				}
+			} else if (count < newFormData.length) {
+				newFormData.length = count;
+			}
+			return newFormData;
+		});
 	};
 
 	return {
-		formData,
-		handleChangeForm,
+		formEmployeeData,
+		handleChangeEmployeeForm,
+		setFormCount,
 	};
 }

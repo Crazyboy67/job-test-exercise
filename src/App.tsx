@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import './App.css';
 import { formChecker } from './Functions/Validation';
 import { useCompanyForm } from './Hooks/useCompanyFrom';
+import { useEmployeeForm } from './Hooks/useEmployeeForm';
 import Company from './Stages/Company';
 import Employee from './Stages/Employee';
 
@@ -11,13 +12,16 @@ function App() {
 
 	const { formData, handleChangeForm } = useCompanyForm();
 
+	const { formEmployeeData, handleChangeEmployeeForm, setFormCount } =
+		useEmployeeForm(formData.NumberOfEmployees);
+
 	const handleCompanySubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setErrors([]);
 		const errors = formChecker(formData);
-		console.log(errors);
 		if (errors.length === 0) {
 			setCurrentStage(2);
+			setFormCount(Number(formData.NumberOfEmployees));
 		} else {
 			setErrors(errors);
 		}
@@ -25,6 +29,12 @@ function App() {
 
 	const handleEmployeeSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		const errors = formChecker(formEmployeeData);
+		if (errors.length === 0) {
+			setErrors([]);
+		} else {
+			setErrors(errors);
+		}
 	};
 
 	const handlePrev = () => {
@@ -43,7 +53,13 @@ function App() {
 					handleChangeForm={handleChangeForm}
 				/>
 			) : (
-				<Employee handleSubmit={handleEmployeeSubmit} onPrev={handlePrev} />
+				<Employee
+					formData={formEmployeeData}
+					errors={errors}
+					handleChangeForm={handleChangeEmployeeForm}
+					handleSubmit={handleEmployeeSubmit}
+					onPrev={handlePrev}
+				/>
 			)}
 		</>
 	);
