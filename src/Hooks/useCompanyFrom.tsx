@@ -1,15 +1,15 @@
 import { ChangeEvent, useState } from 'react';
 
 const initialFormData = {
-	Name: '',
-	Email: '',
+	CompanyName: '',
+	CompanyEmail: '',
 	NumberOfEmployees: 0,
 	Description: '',
 };
 
 interface InputCompanyState {
-	Name: string;
-	Email: string;
+	CompanyName: string;
+	CompanyEmail: string;
 	NumberOfEmployees: number;
 	Description: string;
 }
