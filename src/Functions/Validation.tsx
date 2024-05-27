@@ -11,6 +11,7 @@ type Employee = {
 	JobTitle: string;
 	Age: number;
 	CV: string;
+	FileName: string;
 };
 
 type Data = Company | Employee[];
@@ -25,7 +26,7 @@ export function formChecker(data: Data): Array<string> {
 			if (item.Age < 18)
 				emptyKeys.push(`${index} Age is atleast 18 and required`);
 			if (item.CV === '') emptyKeys.push(`${index} CV is required`);
-			if (item.CV.split('.').pop() !== 'pdf')
+			if (item.FileName.split('.').pop() !== 'pdf')
 				emptyKeys.push(`${index} CV must be a PDF file`);
 		});
 	} else {

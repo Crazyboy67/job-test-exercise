@@ -6,6 +6,7 @@ const initialFormData = {
 	JobTitle: '',
 	Age: 0,
 	CV: '',
+	FileName: '',
 };
 
 interface InputEmployeeState {
@@ -14,6 +15,7 @@ interface InputEmployeeState {
 	JobTitle: string;
 	Age: number;
 	CV: string;
+	FileName: string;
 }
 
 export function useEmployeeForm(initialCount: number) {
@@ -26,11 +28,28 @@ export function useEmployeeForm(initialCount: number) {
 		e: ChangeEvent<HTMLInputElement>
 	) => {
 		const { name, value } = e.target;
-		setFormData((prevFormData) => {
-			const updatedFormData = [...prevFormData];
-			updatedFormData[index] = { ...updatedFormData[index], [name]: value };
-			return updatedFormData;
-		});
+		if (e.target.type !== 'file') {
+			setFormData((prevFormData) => {
+				const updatedFormData = [...prevFormData];
+				updatedFormData[index] = { ...updatedFormData[index], [name]: value };
+				return updatedFormData;
+			});
+		} else {
+			const file = e.target.files?.[0];
+			if (file) {
+				const url = URL.createObjectURL(file);
+				console.log(file.name);
+				setFormData((prevFormData) => {
+					const updatedFormData = [...prevFormData];
+					updatedFormData[index] = {
+						...updatedFormData[index],
+						[name]: url,
+						FileName: file.name,
+					};
+					return updatedFormData;
+				});
+			}
+		}
 	};
 
 	const setFormCount = (count: number) => {

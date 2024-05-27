@@ -3,12 +3,15 @@ import './App.css';
 import { formChecker } from './Functions/Validation';
 import { useCompanyForm } from './Hooks/useCompanyFrom';
 import { useEmployeeForm } from './Hooks/useEmployeeForm';
+import Modal from './Modal';
 import Company from './Stages/Company';
 import Employee from './Stages/Employee';
 
 function App() {
 	const [currentStage, setCurrentStage] = useState(1);
 	const [errors, setErrors] = useState<string[]>([]);
+	const [showModal, setShowModal] = useState(false);
+	const [submittedData, setSubmittedData] = useState();
 
 	const { formData, handleChangeForm } = useCompanyForm();
 
@@ -31,7 +34,13 @@ function App() {
 		e.preventDefault();
 		const errors = formChecker(formEmployeeData);
 		if (errors.length === 0) {
-			setErrors([]);
+			let submitData: { [k: string]: any } = {};
+			submitData = { ...formData };
+			submitData.Employees = formEmployeeData;
+			const JSON_string = JSON.stringify(submitData);
+			//End point here
+			setSubmittedData(submitData);
+			setShowModal(true);
 		} else {
 			setErrors(errors);
 		}
@@ -42,7 +51,6 @@ function App() {
 			setCurrentStage(currentStage - 1);
 		}
 	};
-
 	return (
 		<>
 			{currentStage === 1 ? (
@@ -61,6 +69,7 @@ function App() {
 					onPrev={handlePrev}
 				/>
 			)}
+			{showModal && <Modal formData={submittedData} />}
 		</>
 	);
 }

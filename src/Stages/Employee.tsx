@@ -1,3 +1,5 @@
+import MissingFieldNotification from '../MissingFieldNotification';
+
 type Employe = {
 	Name: string;
 	Email: string;
@@ -16,6 +18,7 @@ const Employee = ({
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
+				{errors.length > 0 && <MissingFieldNotification errors={errors} />}
 				{formData.map((employee: Employe, index: number) => (
 					<div key={index}>
 						<h1>Employee {index + 1}</h1>

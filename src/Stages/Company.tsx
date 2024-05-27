@@ -1,8 +1,11 @@
+import MissingFieldNotification from '../MissingFieldNotification';
+
 const Company = ({ formData, handleSubmit, errors, handleChangeForm }: any) => {
 	return (
 		<>
 			<h1>Company</h1>
 			<form onSubmit={handleSubmit}>
+				{errors.length > 0 && <MissingFieldNotification errors={errors} />}
 				<label htmlFor="CompanyName">Company Name</label>
 				<br />
 				<input
