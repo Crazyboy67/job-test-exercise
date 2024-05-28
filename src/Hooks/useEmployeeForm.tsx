@@ -38,7 +38,6 @@ export function useEmployeeForm(initialCount: number) {
 			const file = e.target.files?.[0];
 			if (file) {
 				const url = URL.createObjectURL(file);
-				console.log(file.name);
 				setFormData((prevFormData) => {
 					const updatedFormData = [...prevFormData];
 					updatedFormData[index] = {
