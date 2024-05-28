@@ -1,0 +1,41 @@
+.error_box {
+	position: fixed;
+	top: 20px;
+	left: 15px;
+	padding: 15px 20px 15px 23px;
+	width: 265px;
+	background-color: white;
+	border-radius: 0.1875rem;
+	box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+	z-index: 100;
+}
+
+.error_box::before {
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 0;
+	width: 3px;
+	height: 100%;
+	background-color: #ff0000;
+	border-radius: 5px 0 0 5px;
+}
+
+.error_title {
+	text-transform: uppercase;
+	color: #ff0000;
+}
+
+.error_missing_field {
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
+}
+
+.error_description {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	color: #bdbdbd;
+	border-bottom: 1px solid #ff0000;
+}

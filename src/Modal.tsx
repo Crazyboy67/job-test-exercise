@@ -1,10 +1,9 @@
-const Modal = ({ formData }: any) => {
+import './css/modal.css';
+
+const Modal = ({ formData, setModal }: any) => {
 	return (
 		<div className="modal">
 			<div className="modal-content">
-				<div className="modal-header">
-					<h5 className="modal-title">Form Data</h5>
-				</div>
 				<div className="modal-body">
 					<h1>Company</h1>
 					<p>Company name: {formData.CompanyName}</p>
@@ -35,11 +34,7 @@ const Modal = ({ formData }: any) => {
 					))}
 				</div>
 				<div className="modal-footer">
-					<button
-						type="button"
-						className="btn btn-secondary"
-						data-dismiss="modal"
-					>
+					<button type="button" onClick={() => setModal(false)}>
 						Close
 					</button>
 				</div>

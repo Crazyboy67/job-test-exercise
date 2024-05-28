@@ -1,3 +1,5 @@
+import './css/errors.css';
+
 const MissingFieldNotification = ({ errors }: any) => {
 	const title = errors.length > 0 ? 'Missing Fields' : 'Missing Field';
 	const description =
