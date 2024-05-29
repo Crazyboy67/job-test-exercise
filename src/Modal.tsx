@@ -1,6 +1,13 @@
+import { Dispatch, SetStateAction } from 'react';
+import { CombinedState } from './App';
 import './css/modal.css';
 
-const Modal = ({ formData, setModal }: any) => {
+interface ModalProps {
+	formData: CombinedState;
+	setModal: Dispatch<SetStateAction<boolean>>;
+}
+
+const Modal = ({ formData, setModal }: ModalProps) => {
 	return (
 		<div className="modal">
 			<div className="modal-content">
@@ -16,19 +23,19 @@ const Modal = ({ formData, setModal }: any) => {
 					{formData.Employees.map((item, index: number) => (
 						<div key={index}>
 							<p>
-								{index} Employee name: {item.Name}
+								{index + 1} Employee name: {item.Name}
 							</p>
 							<p>
-								{index} Employee email: {item.Email}
+								{index + 1} Employee email: {item.Email}
 							</p>
 							<p>
-								{index} Employee age: {item.Age}
+								{index + 1} Employee age: {item.Age}
 							</p>
 							<p>
-								{index} Employee Job title: {item.JobTitle}
+								{index + 1} Employee Job title: {item.JobTitle}
 							</p>
 							<a href={item.CV} target="blank">
-								{index} Employee CV
+								{index + 1} Employee CV
 							</a>
 						</div>
 					))}

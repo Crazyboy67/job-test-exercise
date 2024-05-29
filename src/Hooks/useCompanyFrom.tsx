@@ -7,7 +7,7 @@ const initialFormData = {
 	Description: '',
 };
 
-interface InputCompanyState {
+export interface InputCompanyState {
 	CompanyName: string;
 	CompanyEmail: string;
 	NumberOfEmployees: number;
@@ -17,7 +17,9 @@ interface InputCompanyState {
 export function useCompanyForm() {
 	const [formData, setFormData] = useState<InputCompanyState>(initialFormData);
 
-	const handleChangeForm = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleChangeForm = (
+		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+	) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	};

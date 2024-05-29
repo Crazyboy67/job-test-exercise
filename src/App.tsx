@@ -1,17 +1,21 @@
 import { FormEvent, useState } from 'react';
+import './css/main.css';
 import { formChecker } from './Functions/Validation';
-import { useCompanyForm } from './Hooks/useCompanyFrom';
-import { useEmployeeForm } from './Hooks/useEmployeeForm';
+import { InputCompanyState, useCompanyForm } from './Hooks/useCompanyFrom';
+import { InputEmployeeState, useEmployeeForm } from './Hooks/useEmployeeForm';
 import Modal from './Modal';
 import Company from './Stages/Company';
 import Employee from './Stages/Employee';
-import './css/main.css';
+
+export interface CombinedState extends InputCompanyState {
+	Employees: InputEmployeeState[];
+}
 
 function App() {
 	const [currentStage, setCurrentStage] = useState(1);
 	const [errors, setErrors] = useState<string[]>([]);
-	const [showModal, setShowModal] = useState(false);
-	const [submittedData, setSubmittedData] = useState();
+	const [showModal, setShowModal] = useState<boolean>(false);
+	const [submittedData, setSubmittedData] = useState<CombinedState>();
 
 	const { formData, handleChangeForm } = useCompanyForm();
 
@@ -35,10 +39,11 @@ function App() {
 		const errors = formChecker(formEmployeeData);
 		if (errors.length === 0) {
 			setErrors([]);
-			let submitData: { [k: string]: any } = {};
-			submitData = { ...formData };
-			submitData.Employees = formEmployeeData;
-			const JSON_string = JSON.stringify(submitData);
+			const submitData: CombinedState = {
+				...formData,
+				Employees: formEmployeeData,
+			};
+			// const JSON_string = JSON.stringify(submitData);
 			//End point here
 			setSubmittedData(submitData);
 			setShowModal(true);
@@ -70,7 +75,9 @@ function App() {
 					onPrev={handlePrev}
 				/>
 			)}
-			{showModal && <Modal formData={submittedData} setModal={setShowModal} />}
+			{showModal && submittedData && (
+				<Modal formData={submittedData} setModal={setShowModal} />
+			)}
 		</div>
 	);
 }

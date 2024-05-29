@@ -9,7 +9,7 @@ const initialFormData = {
 	FileName: '',
 };
 
-interface InputEmployeeState {
+export interface InputEmployeeState {
 	Name: string;
 	Email: string;
 	JobTitle: string;

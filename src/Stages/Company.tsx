@@ -1,6 +1,22 @@
+import { ChangeEvent, FormEvent } from 'react';
+import { InputCompanyState } from '../Hooks/useCompanyFrom';
 import MissingFieldNotification from '../MissingFieldNotification';
 
-const Company = ({ formData, handleSubmit, errors, handleChangeForm }: any) => {
+interface CompanyProps {
+	formData: InputCompanyState;
+	errors: string[];
+	handleChangeForm: (
+		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+	) => void;
+	handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+}
+
+const Company = ({
+	formData,
+	handleSubmit,
+	errors,
+	handleChangeForm,
+}: CompanyProps) => {
 	return (
 		<>
 			<h1>Company</h1>

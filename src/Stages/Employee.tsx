@@ -1,12 +1,14 @@
+import { ChangeEvent, FormEvent } from 'react';
+import { InputEmployeeState } from '../Hooks/useEmployeeForm';
 import MissingFieldNotification from '../MissingFieldNotification';
 
-type Employe = {
-	Name: string;
-	Email: string;
-	JobTitle: string;
-	Age: number;
-	CV: string;
-};
+interface EmployeeProps {
+	formData: InputEmployeeState[];
+	errors: string[];
+	handleChangeForm: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
+	handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+	onPrev: () => void;
+}
 
 const Employee = ({
 	formData,
@@ -14,12 +16,12 @@ const Employee = ({
 	handleChangeForm,
 	handleSubmit,
 	onPrev,
-}: any) => {
+}: EmployeeProps) => {
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
 				{errors.length > 0 && <MissingFieldNotification errors={errors} />}
-				{formData.map((employee: Employe, index: number) => (
+				{formData.map((employee, index: number) => (
 					<div key={index}>
 						<h1>Employee {index + 1}</h1>
 						<label htmlFor="Name">Name</label> <br />

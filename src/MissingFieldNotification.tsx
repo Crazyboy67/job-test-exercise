@@ -1,6 +1,12 @@
 import './css/errors.css';
 
-const MissingFieldNotification = ({ errors }: any) => {
+interface MissingFieldNotificationProps {
+	errors: string[];
+}
+
+const MissingFieldNotification = ({
+	errors,
+}: MissingFieldNotificationProps) => {
 	const title = errors.length > 0 ? 'Missing Fields' : 'Missing Field';
 	const description =
 		errors.length > 0
