@@ -54,30 +54,35 @@ function App() {
 
 	const handlePrev = () => {
 		if (currentStage >= 2) {
+			setErrors([]);
 			setCurrentStage(currentStage - 1);
 		}
 	};
 	return (
-		<div className="main_body">
-			{currentStage === 1 ? (
-				<Company
-					formData={formData}
-					handleSubmit={handleCompanySubmit}
-					errors={errors}
-					handleChangeForm={handleChangeForm}
-				/>
-			) : (
-				<Employee
-					formData={formEmployeeData}
-					errors={errors}
-					handleChangeForm={handleChangeEmployeeForm}
-					handleSubmit={handleEmployeeSubmit}
-					onPrev={handlePrev}
-				/>
-			)}
-			{showModal && submittedData && (
-				<Modal formData={submittedData} setModal={setShowModal} />
-			)}
+		<div className="container">
+			<div className="main_body">
+				{currentStage === 1 ? (
+					<Company
+						formData={formData}
+						handleSubmit={handleCompanySubmit}
+						errors={errors}
+						handleChangeForm={handleChangeForm}
+					/>
+				) : (
+					<div className="main-adj">
+						<Employee
+							formData={formEmployeeData}
+							errors={errors}
+							handleChangeForm={handleChangeEmployeeForm}
+							handleSubmit={handleEmployeeSubmit}
+							onPrev={handlePrev}
+						/>
+					</div>
+				)}
+				{showModal && submittedData && (
+					<Modal formData={submittedData} setModal={setShowModal} />
+				)}
+			</div>
 		</div>
 	);
 }

@@ -21,7 +21,7 @@ const Modal = ({ formData, setModal }: ModalProps) => {
 					)}
 					<h1>Employees</h1>
 					{formData.Employees.map((item, index: number) => (
-						<div key={index}>
+						<div className="employee-content" key={index}>
 							<p>
 								{index + 1} Employee name: {item.Name}
 							</p>

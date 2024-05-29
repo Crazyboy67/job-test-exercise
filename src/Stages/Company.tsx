@@ -19,7 +19,7 @@ const Company = ({
 }: CompanyProps) => {
 	return (
 		<>
-			<h1>Company</h1>
+			<h1>Company: </h1>
 			<form onSubmit={handleSubmit}>
 				{errors.length > 0 && <MissingFieldNotification errors={errors} />}
 				<label htmlFor="CompanyName">Company Name</label>

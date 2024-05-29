@@ -19,11 +19,12 @@ const Employee = ({
 }: EmployeeProps) => {
 	return (
 		<>
+			<h1>Employee(s): </h1>
 			<form onSubmit={handleSubmit}>
 				{errors.length > 0 && <MissingFieldNotification errors={errors} />}
 				{formData.map((employee, index: number) => (
 					<div key={index}>
-						<h1>Employee {index + 1}</h1>
+						<h2>Employee {index + 1}</h2>
 						<label htmlFor="Name">Name</label> <br />
 						<input
 							type="text"

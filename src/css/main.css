@@ -1,10 +1,18 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100%;
+}
+
 .main_body {
 	position: relative;
 	left: 100%;
 	display: flex;
-	align-items: center;
 	background-color: antiquewhite;
 	padding: 20px;
 	border-radius: 15px;
 	box-shadow: 0 6px 8px rgb(0 0 0 / 12%), 0 6px 8px rgb(0 0 0 / 24%);
+	margin: auto;
 }
