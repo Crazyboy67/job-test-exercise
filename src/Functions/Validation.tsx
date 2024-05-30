@@ -20,16 +20,17 @@ export function formChecker(data: Data): Array<string> {
 	const emptyKeys: string[] = [];
 	if (Array.isArray(data)) {
 		data.forEach((item, index) => {
-			if (item.Name === '') emptyKeys.push(`${index} Name is required`);
-			if (item.Email === '') emptyKeys.push(`${index} Email is required`);
+			if (item.Name === '') emptyKeys.push(`${index + 1} Name is required`);
+			if (item.Email === '') emptyKeys.push(`${index + 1} Email is required`);
 			if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(item.Email))
-				emptyKeys.push(`${index} Email needs to be a valid email`);
-			if (item.JobTitle === '') emptyKeys.push(`${index} JobTitle is required`);
+				emptyKeys.push(`${index + 1} Email needs to be a valid email`);
+			if (item.JobTitle === '')
+				emptyKeys.push(`${index + 1} JobTitle is required`);
 			if (item.Age < 18)
-				emptyKeys.push(`${index} Age is atleast 18 and required`);
-			if (item.CV === '') emptyKeys.push(`${index} CV is required`);
+				emptyKeys.push(`${index + 1} Age is atleast 18 and required`);
+			if (item.CV === '') emptyKeys.push(`${index + 1} CV is required`);
 			if (item.FileName.split('.').pop() !== 'pdf')
-				emptyKeys.push(`${index} CV must be a PDF file`);
+				emptyKeys.push(`${index + 1} CV must be a PDF file`);
 		});
 	} else {
 		console.log(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.CompanyEmail));

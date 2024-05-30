@@ -8,8 +8,7 @@
 
 .main_body {
 	position: relative;
-	left: 100%;
-	display: flex;
+	left: 500px;
 	background-color: antiquewhite;
 	padding: 20px;
 	border-radius: 15px;

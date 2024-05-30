@@ -19,7 +19,7 @@ const Employee = ({
 }: EmployeeProps) => {
 	return (
 		<>
-			<h1>Employee(s): </h1>
+			<h1>Employee(s)</h1>
 			<form onSubmit={handleSubmit}>
 				{errors.length > 0 && <MissingFieldNotification errors={errors} />}
 				{formData.map((employee, index: number) => (
